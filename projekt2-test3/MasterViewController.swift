@@ -105,13 +105,16 @@ class MasterViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("tableView cell text")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MasterTableViewCell
+        
         let object = objects[indexPath.row]
         let year = object["year"] as! Int
         let artist = object["artist"] as! String
         let album = object["album"] as! String
-        let textConcatenated = "\(artist)  \(album)  \(year)"
-        cell.textLabel!.text = textConcatenated
+        
+        cell.albumLabel.text = album
+        cell.artistLabel.text = artist
+        cell.yearLabel.text = "\(year)"
         return cell
     }
     

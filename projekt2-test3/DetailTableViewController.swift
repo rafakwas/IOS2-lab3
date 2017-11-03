@@ -10,6 +10,9 @@ import UIKit
 
 class DetailTableViewController: UITableViewController {
  
+    
+    
+    @IBOutlet var recordLabel: UILabel!
     @IBOutlet var albumCellText: UITextField!
     @IBOutlet var artistCellText: UITextField!
     @IBOutlet var genreCellText: UITextField!
@@ -54,6 +57,7 @@ class DetailTableViewController: UITableViewController {
         genreCellText.text = genre
         yearCellText.text = "\(year)"
         tracksCellText.text = "\(tracks)"
+        recordLabel.text = "Rekord \(index+1) z \(all)"
         saveButton.isEnabled = false
    }
     
