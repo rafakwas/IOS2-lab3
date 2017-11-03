@@ -25,7 +25,7 @@ class DetailTableViewController: UITableViewController {
     var all : Int = 0
     
     
-    @IBAction func onEditEnd(_ sender: Any) {
+    @IBAction func onEditingChanged(_ sender: Any) {
         saveButton.isEnabled = true
         detailItem["album"] = albumCellText.text!;
         detailItem["artist"] = artistCellText.text!;

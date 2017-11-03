@@ -161,7 +161,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="onEditEnd:" destination="bbn-fW-qxg" eventType="editingDidEnd" id="qBD-q8-JcZ"/>
+                                                        <action selector="onEditingChanged:" destination="bbn-fW-qxg" eventType="editingChanged" id="Xkk-Qi-Stb"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -184,7 +184,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="onEditEnd:" destination="bbn-fW-qxg" eventType="editingDidEnd" id="o8y-8J-PER"/>
+                                                        <action selector="onEditingChanged:" destination="bbn-fW-qxg" eventType="editingChanged" id="6zH-eM-8bO"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -207,7 +207,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="onEditEnd:" destination="bbn-fW-qxg" eventType="editingDidEnd" id="n4R-Mf-X2R"/>
+                                                        <action selector="onEditingChanged:" destination="bbn-fW-qxg" eventType="editingChanged" id="6rO-9c-CTi"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -230,7 +230,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="onEditEnd:" destination="bbn-fW-qxg" eventType="editingDidEnd" id="Svt-PI-GAc"/>
+                                                        <action selector="onEditingChanged:" destination="bbn-fW-qxg" eventType="editingChanged" id="T9B-aK-hze"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -253,7 +253,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="onEditEnd:" destination="bbn-fW-qxg" eventType="editingDidEnd" id="h6a-t7-R0Q"/>
+                                                        <action selector="onEditingChanged:" destination="bbn-fW-qxg" eventType="editingChanged" id="AgR-VC-PuR"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
