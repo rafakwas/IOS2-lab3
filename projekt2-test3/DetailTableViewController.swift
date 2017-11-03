@@ -24,12 +24,19 @@ class DetailTableViewController: UITableViewController {
     
     @IBAction func onEditEnd(_ sender: Any) {
         saveButton.isEnabled = true
+        detailItem["album"] = albumCellText.text!;
+        detailItem["artist"] = artistCellText.text!;
+        detailItem["genre"] = genreCellText.text!;
+        detailItem["tracks"] = Int(tracksCellText.text!);
+        detailItem["year"] = Int(yearCellText.text!);
+        print("onEditEnd: \(detailItem["artist"])")
     }
     
     
     @IBAction func onSaveClicked(_ sender: Any) {
         saveButton.isEnabled = false
-        Linker.masterViewController?.editObject(index, detailItem)
+        print("onSaveClicked for index \(index) and arist \(detailItem["artist"])")
+        Linker.masterViewController!.editObject(index, detailItem)
     }
     
     override func viewDidLoad() {
@@ -44,6 +51,7 @@ class DetailTableViewController: UITableViewController {
         genreCellText.text = genre
         yearCellText.text = "\(year)"
         tracksCellText.text = "\(tracks)"
+        saveButton.isEnabled = false
    }
     
     override func didReceiveMemoryWarning() {

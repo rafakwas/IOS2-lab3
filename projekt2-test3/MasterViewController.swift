@@ -16,6 +16,10 @@ class MasterViewController: UITableViewController {
     
     func editObject(_ index : Int, _ newObject : [String:Any]) {
         objects[index] = newObject
+        print("MasterViewController editObject for index \(index) and arist \(newObject["artist"])")
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func initializeJson(withCompletion completion : @escaping (()->Void)) {
@@ -48,6 +52,10 @@ class MasterViewController: UITableViewController {
     func insertNewObject(_ sender: Any) {
         var newObject = [String:Any]()
         newObject["artist"] = "Nowość"
+        newObject["album"] = "Nowy album"
+        newObject["genre"] = "Pop"
+        newObject["tracks"] = 10
+        newObject["year"] = 2017
         objects.insert(newObject, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
@@ -68,7 +76,7 @@ class MasterViewController: UITableViewController {
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailTableViewController
                 let object = objects[indexPath.row]
                 controller.detailItem = object
-                controller.index = indexPath.row+1
+                controller.index = indexPath.row
                 controller.all = objects.count
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
