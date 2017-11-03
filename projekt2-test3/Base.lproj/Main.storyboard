@@ -112,7 +112,6 @@
         <!--Detail Table View Controller-->
         <scene sceneID="FfV-BU-Km8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pQ0-Yl-WcW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="bbn-fW-qxg" customClass="DetailTableViewController" customModule="projekt2_test3" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KH6-mk-Kg9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -254,11 +253,12 @@
                         <outlet property="yearCellText" destination="44V-XL-RT5" id="Dw4-dJ-pZo"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pQ0-Yl-WcW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="780" y="263.11844077961024"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
+        <segue reference="Tll-UG-LXB"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -41,6 +41,9 @@ class DetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let removeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(removeObject(_:)))
+        navigationItem.rightBarButtonItem = removeButton
+        
         let album = detailItem["album"] as! String
         let artist = detailItem["artist"] as! String
         let genre = detailItem["genre"] as! String
@@ -54,6 +57,11 @@ class DetailTableViewController: UITableViewController {
         saveButton.isEnabled = false
    }
     
+    @objc
+    func removeObject(_ sender: Any) {
+        Linker.masterViewController!.removeObject(index)
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

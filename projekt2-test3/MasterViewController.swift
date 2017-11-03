@@ -22,6 +22,14 @@ class MasterViewController: UITableViewController {
         }
     }
     
+    func removeObject(_ index : Int) {
+        print("Object \(index) removed")
+        objects.remove(at: index)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     func initializeJson(withCompletion completion : @escaping (()->Void)) {
         let urlString = URL(string : "https://isebi.net/albums.php")
         let task = URLSession.shared.dataTask(with: urlString!) {data,response,error in
