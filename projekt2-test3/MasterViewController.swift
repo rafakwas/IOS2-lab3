@@ -14,6 +14,9 @@ class MasterViewController: UITableViewController {
     var detailViewController: DetailTableViewController? = nil
     var objects = [[String:Any]]()
     
+    func editObject(_ index : Int, _ newObject : [String:Any]) {
+        objects[index] = newObject
+    }
     
     func initializeJson(withCompletion completion : @escaping (()->Void)) {
         let urlString = URL(string : "https://isebi.net/albums.php")
@@ -32,6 +35,7 @@ class MasterViewController: UITableViewController {
         });
         sleep(2)
         super.viewDidLoad()
+        Linker.masterViewController = self
         navigationItem.leftBarButtonItem = editButtonItem
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
@@ -62,10 +66,10 @@ class MasterViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailTableViewController
-                var object = objects[indexPath.row]
-                object["index"] = indexPath.row+1
-                object["all"] = objects.count
+                let object = objects[indexPath.row]
                 controller.detailItem = object
+                controller.index = indexPath.row+1
+                controller.all = objects.count
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
