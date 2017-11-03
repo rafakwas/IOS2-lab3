@@ -10,78 +10,98 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
-    var objects = [Any]()
 
-
+    var detailViewController: DetailTableViewController? = nil
+    var objects = [[String:Any]]()
+    
+    
+    func initializeJson(withCompletion completion : @escaping (()->Void)) {
+        let urlString = URL(string : "https://isebi.net/albums.php")
+        let task = URLSession.shared.dataTask(with: urlString!) {data,response,error in
+            self.objects = try! JSONSerialization.jsonObject(with : data!) as! [[String:Any]]
+            completion()
+        }
+        print("initialize json")
+        task.resume()
+    }
+    
     override func viewDidLoad() {
+        print("viewDidLoad")
+        initializeJson(withCompletion: {
+            print("json completed")
+        });
+        sleep(2)
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = editButtonItem
-
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailTableViewController
         }
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
-        super.viewWillAppear(animated)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     @objc
     func insertNewObject(_ sender: Any) {
-        objects.insert(NSDate(), at: 0)
+        var newObject = [String:Any]()
+        newObject["artist"] = "Nowość"
+        objects.insert(newObject, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
-
+    
+    //    func addObject(_ newObject : [String:Any]) {
+    //        objects.insert(newObject, at: 0)
+    //        let indexPath = IndexPath(row: 0, section: 0)
+    //        tableView.insertRows(at: [indexPath], with: .automatic)
+    //    }
+    
     // MARK: - Segues
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepare")
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailTableViewController
+                var object = objects[indexPath.row]
+                object["index"] = indexPath.row+1
+                object["all"] = objects.count
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
     }
-
+    
     // MARK: - Table View
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("tableView count \(objects.count)")
         return objects.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("tableView cell text")
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let object = objects[indexPath.row]
+        let year = object["year"] as! Int
+        let artist = object["artist"] as! String
+        let album = object["album"] as! String
+        let textConcatenated = "\(artist)  \(album)  \(year)"
+        cell.textLabel!.text = textConcatenated
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print("tableView editing/deleteing")
         if editingStyle == .delete {
             objects.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -89,7 +109,7 @@ class MasterViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
-
+    
 
 }
 
